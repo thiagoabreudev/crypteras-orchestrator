@@ -1,0 +1,5 @@
+{
+  "orchestratorRepo": "file:///Users/thiagoabreu/workspace/crypteras-project/crypteras-orchestrator",
+  "aiProvider": "claude",
+  "commandsDir": ".claude/commands"
+}

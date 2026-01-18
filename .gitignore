@@ -1,0 +1,6 @@
+node_modules/
+.env
+.ia.env
+ai.properties.md
+.sessions/*/
+*.log

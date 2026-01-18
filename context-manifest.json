@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "project": "crypteras-orchestrator",
+  "description": "Orquestrador de IA do crypteras",
+  "repositories": [
+    {
+      "id": "metaspecs",
+      "role": "specs-provider",
+      "url": "git@github.com:thiagoabreudev/crypteras-metaspecs.git",
+      "description": "MetaSpecs repository with technical and business specifications"
+    },
+    {
+      "id": "backend",
+      "role": "application",
+      "url": "git@github.com:your-org/your-backend.git",
+      "dependsOn": [
+        "metaspecs"
+      ],
+      "description": "Backend application"
+    },
+    {
+      "id": "frontend",
+      "role": "application",
+      "url": "git@github.com:your-org/your-frontend.git",
+      "dependsOn": [
+        "metaspecs",
+        "backend"
+      ],
+      "description": "Frontend application"
+    }
+  ]
+}

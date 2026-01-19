@@ -4,29 +4,19 @@
   "description": "Orquestrador de IA do crypteras",
   "repositories": [
     {
-      "id": "metaspecs",
+      "id": "crypteras-metaspecs",
       "role": "specs-provider",
       "url": "git@github.com:thiagoabreudev/crypteras-metaspecs.git",
-      "description": "MetaSpecs repository with technical and business specifications"
+      "description": "Metaspecs do crypteras"
     },
     {
-      "id": "backend",
+      "id": "crypteras-improved",
       "role": "application",
-      "url": "git@github.com:your-org/your-backend.git",
+      "url": "git@github.com:thiagoabreudev/crypteras-v2.git",
+      "description": "Sistema de trading de criptoativos com apoio de IA",
       "dependsOn": [
-        "metaspecs"
-      ],
-      "description": "Backend application"
-    },
-    {
-      "id": "frontend",
-      "role": "application",
-      "url": "git@github.com:your-org/your-frontend.git",
-      "dependsOn": [
-        "metaspecs",
-        "backend"
-      ],
-      "description": "Frontend application"
+        "crypteras-orchestrator"
+      ]
     }
   ]
 }

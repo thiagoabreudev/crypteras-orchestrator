@@ -36,16 +36,40 @@ Antes de executar, certifique-se de que:
 - ❌ NUNCA faça checkout nos repositórios principais
 - ❌ NUNCA navegue para `{base_path}/{repo-id}/`
 
+## 🛑 CRÍTICO: ONDE CRIAR CÓDIGO
+
+**⚠️ ATENÇÃO: TODO CÓDIGO DEVE SER CRIADO DENTRO DO WORKTREE DO REPOSITÓRIO!**
+
+**✅ CORRETO** - Criar código dentro do worktree:
+```
+<orchestrator>/.sessions/<ISSUE-ID>/<repo-name>/src/file.ts  ✅
+<orchestrator>/.sessions/<ISSUE-ID>/<repo-name>/tests/test.ts  ✅
+<orchestrator>/.sessions/<ISSUE-ID>/<repo-name>/package.json  ✅
+```
+
+**❌ ERRADO** - NUNCA criar código diretamente em .sessions:
+```
+<orchestrator>/.sessions/src/file.ts  ❌
+<orchestrator>/.sessions/<ISSUE-ID>/src/file.ts  ❌
+<orchestrator>/.sessions/<ISSUE-ID>/file.ts  ❌
+```
+
+**REGRA ABSOLUTA**:
+- 🛑 **TODO arquivo de código** (`.ts`, `.js`, `.py`, `.java`, etc.) **DEVE estar dentro de** `<orchestrator>/.sessions/<ISSUE-ID>/<repo-name>/`
+- 🛑 **NUNCA crie código** diretamente em `<orchestrator>/.sessions/` ou `<orchestrator>/.sessions/<ISSUE-ID>/`
+- ✅ **Único lugar válido**: Dentro do worktree do repositório específico
+
 ## ⚠️ IMPORTANTE: Arquivos Imutáveis
 
 **Este comando deve LER mas NÃO MODIFICAR:**
 - ✅ **LER** `.sessions/<ISSUE-ID>/context.md` (imutável)
 - ✅ **LER** `.sessions/<ISSUE-ID>/architecture.md` (imutável)
 - ✅ **ATUALIZAR** `.sessions/<ISSUE-ID>/plan.md` (marcar progresso)
-- ✅ **IMPLEMENTAR** código nos repositórios do workspace
-- ✅ **FAZER COMMITS** nos repositórios do workspace
+- ✅ **IMPLEMENTAR** código **DENTRO DO WORKTREE**: `.sessions/<ISSUE-ID>/<repo-name>/`
+- ✅ **FAZER COMMITS** nos worktrees: `.sessions/<ISSUE-ID>/<repo-name>/`
 - ❌ **NÃO modificar `context.md` ou `architecture.md`**
 - ❌ **NÃO fazer checkout de branches nos repositórios principais (fora do workspace)**
+- 🛑 **NUNCA criar código em `.sessions/` ou `.sessions/<ISSUE-ID>/` diretamente**
 
 ## 📚 Carregar MetaSpecs
 
@@ -69,6 +93,25 @@ Implementar uma unidade de trabalho específica do plano, que pode envolver:
 
 ## 📝 Processo de Trabalho
 
+**⚠️ IMPORTANTE: CONTROLE DE PROGRESSO**
+
+Este comando executa o trabalho em **fases incrementais**. Após completar cada **FASE PRINCIPAL** (ex: Fase 1 → Fase 2):
+
+1. 🛑 **PARE** a execução
+2. 📊 **APRESENTE** um resumo do que foi feito
+3. ❓ **PERGUNTE** ao desenvolvedor se ele quer:
+   - Revisar o código implementado
+   - Fazer ajustes antes de continuar
+   - Prosseguir para a próxima fase
+
+**IMPORTANTE**:
+- ✅ **PAUSE** entre fases principais (Fase 1 → Fase 2 → Fase 3)
+- ❌ **NÃO pause** entre subfases (Fase 1.1 → Fase 1.2 → Fase 1.3)
+
+**NÃO implemente tudo de uma vez**. Trabalhe fase principal por fase principal, aguardando confirmação do desenvolvedor.
+
+---
+
 ### 1. Identificar Unidade de Trabalho
 
 Com base no plano técnico (`./.sessions/<ISSUE-ID>/plan.md`), identifique:
@@ -78,6 +121,8 @@ Com base no plano técnico (`./.sessions/<ISSUE-ID>/plan.md`), identifique:
 - Dependências com outras tarefas
 
 ### 2. Implementação
+
+
 
 **IMPORTANTE**: Trabalhe APENAS dentro do workspace em `.sessions/<ISSUE-ID>/`
 
@@ -99,12 +144,16 @@ Execute a implementação seguindo:
 - **Testes**: Implemente testes conforme padrões do projeto
 - **Documentação**: Atualize comentários e docs quando necessário
 
+
+
 ### 3. Validação Local
 
 Antes de commitar:
 - Execute testes unitários/integração
 - Verifique linting e formatação
 - Confirme que não quebrou funcionalidades existentes
+
+
 
 ### 4. Commit
 
@@ -127,6 +176,12 @@ Refs: <ISSUE-ID>"
 ```
 
 **Tipos de commit**: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`
+
+**⚠️ PAUSA OBRIGATÓRIA**: Após completar TODA a fase principal (identificação + implementação + validação + commit + atualização do plan.md), **PARE** e mostre ao desenvolvedor:
+- Resumo completo da fase
+- Arquivos criados/modificados
+- Commits realizados
+- Pergunte se ele quer revisar ou prosseguir para a próxima fase
 
 ### 5. Atualização do Plan.md
 
